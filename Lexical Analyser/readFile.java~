@@ -1,0 +1,17 @@
+import java.util.*;
+import java.io.*;
+
+public class readFile{
+	private Scanner x;
+	public String a[];
+	public void readFile(String b){
+		x = new Scanner(new File(b));
+		for (int i=0;x.hasNext();i++){
+			String a[] = x.next();
+		}
+	}
+	
+	public String accessLex(){
+		return a[];
+	}
+}

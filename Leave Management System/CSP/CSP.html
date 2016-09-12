@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title> CSP 203 Project </title>
+<link href="http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+<style type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+	}
+
+
+#wrapper {
+                position: fixed;
+                height: 40px;
+                width: 100%;
+                background-color:#0041C2;
+            }
+            
+#nav {
+                list-style: none;
+                float: right;
+                position: relative;
+            }
+#nav li {
+                float: left;
+                display: block;
+                height: 40px;
+                width: 200px;
+                text-align: center;
+                line-height: 40px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                box-sizing:border-box;
+                color:white ;
+                border-left: 1px inline rgba(225,225,225,.5);
+                border-right: 1px inline rgba(225,225,225,.5);
+            }
+#span {
+                height: 5px;
+                width: 200px;
+                background: white ;
+                position: absolute;
+                bottom: 0;
+            }
+#content{ width: 100%;
+		}	
+#content2{width: 100%;}
+#signin{ -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+	-webkit-animation-iteration-count:infinite;
+    animation-name: example;
+    animation-duration: 1s;
+	animation-iteration-count:infinite;}
+@-webkit-keyframes example {
+    from {top:-400px;color:#FFFF00;}
+    to {top:-410px;color: red;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {top:-400px;color: #FFFF00;}
+    to {top:-410px;color: red;}
+}
+#signup {	-webkit-animation-name: example2; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+	-webkit-animation-iteration-count:infinite;
+    animation-name: example2;
+    animation-duration: 1s;
+	animation-iteration-count:infinite;}
+@-webkit-keyframes example2 {
+    from {color:#FFFF00;}
+    to {color: red;}
+}
+@keyframes example2 {
+    from {color: #FFFF00;}
+    to {color: red;}
+}
+</style>
+<body>
+<div id="wrapper" style="z-index:3;">
+        <ul id="nav">
+            <div id="span"></div>
+            <a href="#content"><li>Home</font></li></a>
+            <a href="#content1"><li>Sign in</li></a>
+            <a href="#content2"><li>Sign up</font></li></a>
+            <a href="#content3"><li>Credits</font></li></a>
+        </ul>
+    </div>
+<div id="content">
+<img src="Top-HD-Wallpapers4.jpg" style="position:relative;top:40px; height:900px; width: 100%;z-index:-1;">
+<p  style="position:relative ; top:-700px; left: 250px; color:#FFFF00; font-size:70px;z-index:-1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b> AWESOMENESS </b></p>
+<p id="signin" style="position:relative; top: -900px ; left: 400px; color:#FFFF00; font-size: 30px; z-index:1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b> SCROLL </b></p>
+</div>
+<div id="content1">
+<img src="wallpaper-black-hd-hd-wallpapers.jpg" style="position:relative;top:-100px;height:100%; width: 100%;z-index:-1;">
+<p  style="position:relative; top:-800px; left: 300px; color:#FFFF00; font-size:70px;z-index:-1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b> LOG IN </b></p>
+<form method="POST" action="connectivity.php" style="position:relative; top:-700px; left: 200px; color:#FFFF00; font-size:35px; font-family: 'Josefin';"> 
+		User <br><input type="text" name="user" size="40" >
+		<br>
+		Password 
+		<br>
+		<input type="password" name="pass" size="40">
+		<br> 
+		<input id="button" type="submit" name="sign_in" value="Log-In" size="30" style="font-weight:bold;color:black;font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"> 
+	</form>	
+<p style="position:relative;top:-670px; left: 200px; color:#FFFF00; font-size: 20px; z-index:-1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b>Donot have an account yet ?</b></p>	
+<p id="signup" style="position:relative;top:-650px; left: 200px; color:#FFFF00; font-size: 20px; z-index:-1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b>SIGN UP!
+</div></b></p>
+<div id="content2" style="position:relative;top:-437px;">
+<img src="background-website-26-hd-wallpaper-background-and-wallpaper.jpg" style="position:relative;top:px;height:100%; width: 100%;z-index:-1;">
+<p style="position:relative;top:-700px; left: 450px; color:#FFFF00; font-size: 70px; z-index:1; font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;"><b>SIGNUP HERE</b></p>
+	<form method="POST" action="connectivity.php" style="position:relative; top:-700px; left: 200px; color:#FFFF00; font-size:35px; font-family: 'Josefin';">
+		Name <br><input type="text" name="name" size="40">
+		<br> 
+		Email Id <br><input type="text" name="new_user" size="40">
+		<br>
+		Password 
+		<br>
+		<input type="password" name="pass1" size="40">
+		<br> 
+		Confirm Password 
+		<br>
+		<input type="password" name="pass2" size="40">
+		<br>
+		Level<br>
+		<select name="level">
+			<option value=1>Level 1</option>
+			<option value=2>Level 2</option>
+			<option value=3>Level 3</option>
+		</select>
+		<br>
+		<input id="button" type="submit" name="sign_up" value="Sign-Up"> 
+	</form>
+</div>
+<script type="text/javascript">
+function slideAnimate() {
+			var i = document.getElementById('span');
+            var h = window.innerHeight;
+            var x = 2*h;
+            var y = 3*h;
+            var Yoffset  = window.pageYOffset;
+           if(Yoffset < (1.3*h)){
+               i.style.left = "0px";
+               
+           }
+            else if(Yoffset < (2.6*h)) {
+                i.style.left = "200px";
+                
+            }
+            else if(Yoffset < (3.8*h)) {
+                i.style.left = "400px";
+               
+            }
+            else if (Yoffset >= (3*h)){
+                 i.style.left = "600px";
+                
+            }
+            
+                      
+            
+        }
+	window.addEventListener('scroll',slideAnimate);
+        window.addEventListener('resize', element);
+        
+</script>
+	
+</body>
+
+</html>

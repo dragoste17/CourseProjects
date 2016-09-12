@@ -1,0 +1,29 @@
+Q.1) Input : array = [9,5,4,3,2,1,7,6]
+
+     Run : python shell_sort.py
+
+     Observations : i) By shell sort the given array was sorted in 8 steps, whereas it took 18 steps for
+                       insertion sort to do the same.
+                    ii) This method is much faster than the insertion sort
+
+
+
+
+
+Q.2) Input : array = [9,8,7,6,5,4,3,2,1]
+
+     Run : python compare_sort.py
+
+     Observations : i) By using raw insertion sort we have 36 transactions required.
+                    ii) By using two-check-alpha sort followed by insertion sort, and after using the value
+                        of alpha as 15, the transactions required are 26, after checking for 50 repetitions.
+                    iii) So using the second method is clearly better for sorting.
+
+     Note: i) To get results of raw insertion sort only line 69 (twocheck(array))
+              and line 73 (print k+alpha) are to be removed/commented.
+           ii) Transactions invole only shifting and swapping tasks as reading is common in both.
+
+
+Q.3) Run : python n_alpha.py
+   
+     Observations : The graph is observed and attached

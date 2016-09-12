@@ -1,0 +1,74 @@
+import random
+alpha = 15
+
+
+
+
+def twocheck(arr):
+	'''This method will attempt to sort the array by picking up randomly two numbers
+	and trying to swap them ultimately leading to all numbers being picked up and sorted if lucky'''
+	for elem in range(alpha):
+		a=random.randrange(len(array))
+		b=random.randrange(len(array))
+		if a>b:
+			a,b=b,a
+		if a<b:
+			if arr[a]>arr[b]:
+				arr[a],arr[b]=arr[b],arr[a]
+
+
+
+
+
+
+
+
+
+def insSort(array):
+	'''This will sort the array in ascending order by using the insertion sort method
+	and returns the number of transactions required in the process'''
+	k=0
+	for i in range(1,len(array)):
+		temp=array[i]
+		j=i-1
+		while temp<array[j] and j>-1:
+			array[j+1]=array[j]
+			j=j-1
+			k=k+1
+		array[j+1]=temp
+	return k
+
+
+
+
+
+
+
+def checkSort(array):
+	'''This will check if the array is sorted and returns boolean value'''
+	p=0
+	for i in range(0,len(array)):
+		for j in range(i+1,len(array)):
+			if array[i]<array[j]:
+				continue
+			else:
+				print 'Array is not sorted'
+				return
+	if i==((len(array))-1):
+		print 'Array is sorted'
+
+
+
+
+
+
+
+
+
+array=[9,8,7,6,5,4,3,2,1]
+twocheck(array)
+#k=insSort(array)
+print array
+#print k
+print alpha
+checkSort(array)

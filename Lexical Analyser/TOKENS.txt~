@@ -1,0 +1,27 @@
+IDENT      	variables
+KEY		keywords
+STRING		strings
+DIGIT		numbers
+ADD_OP		+
+SUB_OP		-
+MUL_OP		*
+DIV_OP		/
+MOD_OP		%
+ASSIGN_OP	=
+NOTEQ_OP	!=
+LESS_OP		<
+GREAT_OP	>
+LESSEQ_OP	<=
+GREATEQ_OP	>=
+LEFT_PAREN	(
+RIGHT_PAREN	)
+COMMA		,
+SEMICOLON	;
+COLON		:
+PERIOD		.
+COLEQ		:=
+QUES		?
+EXCLAIM		!
+LEFT_BRACE	{
+RIGHT_BRACE	}
+COMMENT		/* ... */ or //

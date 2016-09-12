@@ -1,0 +1,19 @@
+int square (x:StrIng) {
+	return x * x;
+}
+boOl y;                //This is a bool
+const cs;              /*This is const /*called cs*/ in simpL*/
+void Main {
+	if (x=1 and y=0){
+		var x : int;
+		vAr squ : real;
+		x := 1;
+		while x <= 10 do
+		{
+			squ := square (x);
+			!squ;
+		}
+	} else (cs=1 or i=10.){
+		RETURN 10;
+	}
+}

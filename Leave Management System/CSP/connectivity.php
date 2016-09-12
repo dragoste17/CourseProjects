@@ -1,0 +1,351 @@
+<?php 
+
+$servername = "localhost";
+$username = 'root';
+$password = '';
+$dbname = 'cspprojectdatabase';
+$AdminId="admin@iitrpr.ac.in";
+$AdminPassword="xyz";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname) or die("Failed to connect to MySQL: " . mysql_error());	
+function getRowResult(&$sql)
+{
+	global $conn;
+	$query = mysqli_query($conn,$sql) or die(mysqli_error()); 
+	$row = mysqli_fetch_row($query) or die(mysql_error());	
+	return $row;
+}
+function loadPersonalInformation()
+{	
+	global $conn;
+	$id123=$_POST['user'];
+	$id = mysqli_real_escape_string($conn,$id123);
+	global $conn;
+	$sqlCommand="SELECT level FROM user where id='$id'";
+	$result = mysqli_query($conn, $sqlCommand) or die(mysqli_error());
+	$row=mysqli_fetch_assoc($result);
+	if($row["level"]==3){
+		$sqlCommand="SELECT * FROM dashboard where id = '$id' AND subject='Applications'";
+			$result = mysqli_query($conn, $sqlCommand) or die(mysqli_error());
+			$countt=0;
+				echo "<br>";
+				if (mysqli_num_rows($result) > 0) {
+					echo "<div class='col-sm-6'></div><div class='col-sm-6'><h3 style='text-align:center'>LEAVE APPLICATIONS</h3><ul style='list-style-type:circle; background-color:white;border: 2px solid  black;'>";
+					while($row = mysqli_fetch_assoc($result)) {
+						$countt=$countt+1;						echo "<li><br> $countt .) id : ".$row['applicant']."<br>Date : ".$row["date"]."<br>Type of leave : ".$row["TypeOfLeave"]."<br>Number of leaves : ".$row["LeavesNeeded"]."<br>Reason : ".$row["content"]."</li><br>
+					
+		<form method='POST' action='updatedashboard.php'>
+			<input name='to' value=".$row["applicant"]." style='visibility:hidden;'>
+			<input name='from' value=".$id." style='visibility:hidden;'>
+			<input name='date' value=".$row["date"]. " style='visibility:hidden;'> 
+			<!--code for updating applicant dashboard here-->
+			<input name='LeavesNeeded' value=".$row["LeavesNeeded"]. " style='visibility:hidden;'> 
+			<input name='TypeOfLeave' value=".$row["TypeOfLeave"]. " style='visibility:hidden;'> 
+			<br>
+			<input style='color:GREEN; font-size:15px;' align='middle' type='submit' value='Accept' name='level3_approve'>
+			<input style='color:red; font-size:15px;' align='middle' type='submit' value='Reject' name='level3_reject'>
+			</form>
+		<br><br>";}
+		echo "</ul></div></div>";
+		}
+		else {
+
+			echo "<div class='col-sm-6'></div><div class='col-sm-6'><h3 style='text-align:center'>LEAVE APPLICATIONS</h3><ul style='list-style-type:circle; background-color:white;border: 2px solid  black;'><ul style='list-style-type:circle'>";
+
+			echo "No results to show";
+
+			echo "</ul></div>";
+		}
+
+	}
+	else if($row["level"]==2){
+			$sqlCommand="SELECT * FROM dashboard where id = '$id' AND subject='Applications'";
+			$result = mysqli_query($conn, $sqlCommand) or die(mysqli_error());
+			$countt=0;
+			$ForwardApplicationForLeave='id3@gmail.com';				//by default applications will be forwarded to this person for approval
+			
+				echo "<br>";
+				if (mysqli_num_rows($result) > 0) {
+				echo "<div class='col-sm-6'></div><div class='col-sm-6'><h3 style='text-align:center'>LEAVE APPLICATIONS</h3><ul style=' background-color:white;border: 2px solid  black;'>";
+					while($row = mysqli_fetch_assoc($result)) {
+						$countt=$countt+1;
+						$RejectedApplicatant=$row["applicant"];
+						echo "<li><br> $countt .) id : ".$row['applicant']."<br>Date : ".$row["date"]."<br>Type of leave : ".$row["TypeOfLeave"]."<br>Number of leaves : ".$row["LeavesNeeded"]."<br>Reason : ".$row["content"]."</li>
+		<form method='POST' action='updatedashboard.php'>
+			<input name='to_approve' value=".$ForwardApplicationForLeave." style='visibility:hidden;position:relative;z-index:-1'>
+			<input name='notice_to' value=".$RejectedApplicatant." style='visibility:hidden;position:relative;z-index:-1'>
+			<input name='from' value=".$row	['id']." style='visibility:hidden;position:relative;z-index:-1'>
+			<input name='date' value=".$row['date']. " style='visibility:hidden;position:relative;z-index:-1'> 
+			<input name='LeavesNeeded' value=".$row['LeavesNeeded']. " style='visibility:hidden;position:relative;z-index:-1'>
+			<input name='TypeOfLeave' value=".$row['TypeOfLeave']. " style='visibility:hidden;position:relative;z-index:-1;'>
+			<textarea rows='0' cols='0' maxlength='300' name='content' style='visibility:hidden;position:relative;z-index:-1'> ".$row['content']."</textarea>
+			<br>
+			<input style='color:GREEN; font-size:15px;'  type='submit' value='Accept' name='level2_approve'>
+			<input style='color:red; font-size:15px;'  type='submit' value='Reject' name='level2_reject'>
+			</form>
+		<br><br>";}
+		echo "</ul>";
+		}
+		else {
+
+			echo "<div class='col-sm-6'></div><div class='col-sm-6'><h3 style='text-align:center'>LEAVE APPLICATIONS</h3><ul style='background-color:white;border: 2px solid  black;'>";
+
+			echo "No results to show";
+
+			echo "</ul>";
+		}
+
+		$sqlCommand="SELECT * FROM dashboard where id = '$id' AND  subject = 'Responses'";
+		$result = mysqli_query($conn, $sqlCommand) or die(mysqli_error());
+		$countt=0;
+		echo "<br>";
+		if (mysqli_num_rows($result) > 0) {
+			echo "<h3 style='text-align:center;'> Response of Your Leaves </h3><ul style='background-color:white;border: 2px solid  black;'>";
+			while($row = mysqli_fetch_assoc($result)) {
+				$countt=$countt+1;
+				echo "<li><br> $countt .) id : ".$row["id"]."<br>Date : ".$row["date"]."<br>Subject : ".$row["subject"]."<br>Leaves Needed : ".$row["LeavesNeeded"]."<br>Type of leave : ".$row["TypeOfLeave"]."<br>Reason : ".$row["content"]."</li><br>";
+			}
+		echo "</ul></div></div>";
+		}
+		else {
+
+			echo "<h3 style='text-align:center;'> Response of Your Leaves </h3><ul style='background-color:white;border: 2px solid  black;'>";
+
+			echo "No results to show";
+
+			echo "</ul></div></div>";
+		}
+	}
+	else{
+		$sqlCommand="SELECT * FROM dashboard where id = '$id' AND  subject = 'Responses'";
+		$result = mysqli_query($conn, $sqlCommand) or die(mysqli_error());
+		$countt=0;
+		echo "<div class='col-sm-6'></div><div class='col-sm-6'><h3 style='text-align:center'>Response of Your Leaves</h3>";
+		if (mysqli_num_rows($result) > 0) {
+			echo "<ul style='background-color:white;border: 2px solid  black;'>";
+			while($row = mysqli_fetch_assoc($result)) {
+				$countt=$countt+1;
+				echo "<li><br> $countt .) id : ".$row["id"]."<br>Date : ".$row["date"]."<br>Subject : ".$row["subject"]."<br>Leaves Needed : ".$row["LeavesNeeded"]."<br>Type of leave : ".$row["TypeOfLeave"]."<br>Reason : ".$row["content"]."</li><br>
+	";
+			}
+		echo "</ul>";
+		}
+		else {
+
+			echo "<ul style='background-color:white;border: 2px solid  black;'>";
+
+			echo "No results to show";
+
+			echo "</ul></div></div>";
+		}
+
+
+	}
+}
+function SignIn() { 
+global $conn;
+session_start();
+global $AdminId,$AdminPassword;
+$id456 = $_POST['user'];
+$posterior123 = $_POST['pass'];
+$posterior = mysqli_real_escape_string($conn,$posterior123);
+$id1 = mysqli_real_escape_string($conn,$id456);
+if(!empty($id1)) //checking the 'user' name which is from Sign-In.html, is it empty or have some text
+{
+			$_SESSION['user_name']=$id1;
+			$_SESSION['password']=$posterior;
+			if($id1==$AdminId && $posterior==$AdminPassword)
+				{header("Location:Admin.php");}
+			$sqlCommand="SELECT * FROM user where id = '$id1' AND password = '$posterior'";
+			$row = getRowResult($sqlCommand);  
+	if(isset($_SESSION['user_name']) && isset($_SESSION['password']))
+	{
+		if(!empty($row[0]) AND !empty($row[1]))			//0 for id,1 for password,2 for name,3 for level,4 for number of leaves left. 
+		 {
+		 	$_SESSION['id'] = $row[1];
+		 	echo "<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<title>IIT Ropar Leave Management</title>
+<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+</head>
+<body style='background-color:#F0F8FF;'>
+	<div class='container'>
+	<h1 style='text-align:center'><img style='display:inline;' class='img-responsive' src='IIT_Ropar_Official_Logo.jpg' width='50px' height='50px'> Leave Management Cell @IIT Ropar </h1>
+	<h2 style='text-align:center;'> Welcome $row[3] </h2>
+	<a href='log_out.php'><h4 style='text-align:center'>(Log Out)</h4></a>
+	<h3 style='text-align:center;'>  Designation : $row[2]</h3>
+	<h3 style='text-align:center;'><u>  No. of leaves left </u> </h3>
+	<table style='width:100%;'>
+  <tr>
+    <th style='text-align:center;'>Leave Type</th>
+    <th style='text-align:center;'>Leaves Left</th>		
+  </tr>
+  <tr>
+    <td style='text-align:center;'>Type 1:</td>
+    <td style='text-align:center;'>$row[1]</td>		
+  </tr>
+  <tr>
+    <td style='text-align:center;'>Type 2:</td>
+    <td style='text-align:center;'>$row[5]</td>		
+  </tr>
+  <tr>
+    <td style='text-align:center;'>Type 3:</td>
+    <td style='text-align:center;'>$row[6]</td>		
+  </tr>
+  <tr>
+    <td style='text-align:center;'>Type 4:</td>
+    <td style='text-align:center;'>$row[7]</td>		
+  </tr>
+</table>
+<br>
+<div style='background-color:black;height:2px;width:device-width;'> 
+</div>
+<br>
+	<div class='row'>
+	<div class='col-sm-6'>
+	<h3 align='center'><br>LEAVE APPLICATION FORM</font><br></h3>
+  <br>
+  <form method='POST' action='updatedashboard.php'>
+    First Name<label>*</label>:<br>
+    <input maxlength='20' type='text' name='firstname' placeholder='First Name' required />
+	<br><br>
+	Last Name<label>*</label>:<br>
+	<input maxlength='20' type='text' name='lastname' placeholder='Last Name' required />
+	<br><br>
+	Send To<label>*</label>:<br>
+	<input maxlength='30' type='email' name='emailaddress' placeholder='anything@iitrpr.ac.in' required />
+	<input name='from' value=$row[0] style='visibility:hidden' />
+	<input name='subject' value='Applications' style='visibility:hidden' />
+	<br><br>
+	Leave From<label>*</label>:
+	<input id='start' name='start' type='date' /> 
+	&nbsp To<label>*</label>:
+	<input id='end' name='end' type='date' />
+	<br><br>
+	Leave Type:<select id='type' name='TypeOfLeave'>
+					  <option value='leaves'>Type 1</option>
+					  <option value='leaves2'>Type 2</option>
+					  <option value='leaves3'>Type 3</option>
+					  <option value='leaves4'>Type 4</option>
+					</select>
+	<br><br>
+	Description<label>*</label>:<br></font>
+	<textarea rows='7' cols='68' maxlength='200'  name='description' placeholder='Enter reason for leave...(max. 200 characters)' required></textarea>
+	<br><br>
+	<input type='reset' name='reset'  value='Reset' /> &nbsp &nbsp <input name='SubmitApplication' type='submit' value='Submit'>
+	<br><br>
+	<label>* marked fields are mandatory.</label>
+  </form>
+</div>";
+		}
+		else 
+		{
+			echo $row[0]." ".$row[1];
+			echo "SORRY... YOU ENTERD WRONG ID AND PASSWORD... <a href='CSP.html#content1'> PLEASE RETRY... </a>";
+		}
+	}
+			
+		 	loadPersonalInformation();	
+}
+		 else{
+		 echo 'you need to log in again to proceed';
+		 exit();
+		 }
+}
+
+function SignUp(){
+		global $conn;
+		 session_start();
+		//code for sign-up form
+		$id2789 = $_POST['name'];
+		$id2 = mysqli_real_escape_string($conn,$id2789);
+		$new123 = $_POST['new_user'];
+		$new1 = mysqli_real_escape_string($conn,$new123);
+		$pswd123 = $_POST['pass1'];
+		$pswd1 = mysqli_real_escape_string($conn,$pswd123);
+		$pswd456 = $_POST['pass2'];
+		$pswd2 = mysqli_real_escape_string($conn,$pswd456);
+		if(!empty($id2)) //checking the 'user' name which is from Sign-In.html, is it empty or have some text
+		{
+			$Name=$id2;
+		}
+		else{
+			echo "Name can't be blank.";
+			exit();
+		}
+		if(!empty($new1)) //checking the 'user' name which is from Sign-In.html, is it empty or have some text
+		{
+			$NewUserName=$new1;
+		}
+		else{
+			echo "you can't leave Email field empty";
+			exit();
+		}
+	if(!empty($pswd1)) //checking the 'user' name which is from Sign-In.html, is it empty or have some text
+	{
+		$NewPassword=$pswd1;
+	}
+	else{
+		echo "you can't leave Password field empty";
+		exit();
+	}		
+	if(!empty($pswd2)) //checking the 'user' name which is from Sign-In.html, is it empty or have some text
+	{
+		if($pswd2!=$NewPassword)
+		{
+			echo "Password don't match!";
+			exit();
+		}
+	}
+	else{
+		echo "Passwords don't match!";
+		exit();
+	}
+	$level123=$_POST['level'];
+	$level = mysqli_real_escape_string($conn,$level123);
+	global $conn;
+	$url_id = $new1;
+	$sql="SELECT * FROM user where id = '$new1'";
+
+	$result = mysqli_query($conn,$sql);
+
+	if($row = mysqli_fetch_row($result)){
+		echo "This user ID already exists.";
+		exit();
+
+	}
+	else{
+		$leaves=14;							//Default number of leaves allowed per user
+		$leaves2=4;
+		$leaves3=7;
+		$leaves4=10;
+		$sql = "INSERT INTO user ".
+		"(id,password,name,level,leaves,leaves2,leaves3,leaves4) ".
+		"VALUES('$NewUserName','$NewPassword','$Name','$level','$leaves','$leaves2','$leaves3','$leaves4')";
+		if (mysqli_query($conn, $sql)) {
+			echo file_get_contents("signup.html");
+		} else {
+			echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		}
+	}
+
+
+
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	
+	if (isset($_POST['sign_in'])) {
+	
+		SignIn();
+	} 
+	else if(isset($_POST['sign_up'])) {
+		SignUp();
+	}
+
+} 
+?>

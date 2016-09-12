@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+		 	<html lang='en'>
+		 	<head>
+		 		<link href='http://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+		 		<title> CSP 203 Project </title>
+		 		<style type='text/css'>
+		 			*{
+		 				margin: 0px;
+		 				padding: 0px;
+		 			}
+#background{ background-image: url('background.jpg');}
+		 			a:link {color:white; background-color:transparent; text-decoration:none}
+		 			a:visited {color:white; background-color:transparent; text-decoration:none}
+		 			a:hover   {color:#ff0000; background-color:transparent; text-decoration:underline}
+		 			body { width:100%; }
+		 			label.attri{
+		 				color:red;
+		 			}
+		 			input.attri{
+		 				font-family:Courier;
+		 				font-size:16px;
+		 			}
+		 			input.but{
+		 				font-size:17px
+		 			}
+#savi{
+		 			margin: 0 auto;
+		 			width: 500px;		
+		 			padding: 2em;
+		 			/*border: 2px solid #CCC;*/
+		 			border-radius: 1em;
+		 			background-color: #5E2F26;
+		 			z-index: 2;
+		 			box-shadow: 7px 7px 5px #885757;
+		 		}
+		 		input, textarea {
+		 			font: 1em;
+		 			border: 1px solid #999;
+		 		}
+#vaidehi{font-family: 'Roboto', sans-serif;}
+		 	</style>
+		 	<body id='background'>
+		 		<p style='position:relative;color:white;font-size:50px;left:400px;'><b> Welcome $row[2] </b></p>
+		 		<br>
+		 		<p style='position:relative;color:white;font-size:35px;left:550px;'> Designation : $row[3] <br> No. of leaves left : $row[4] </p>
+		 		<a href='CSP.html#content1' style='position:relative;left:1200px;font-size:20px;top:-150px;'>Sign Out</a>
+		 		<a href='#vaidehi' style='position:relative;color:white;font-size:20px;left:550px;'><i> (Link to leave form) </i> </a>
+		 		<xmp id='vaidehi' style='position:relative; top:1030px; left:450px; font-size:70px; color:white;'> I WANT A <br>! </xmp>  
+		 		<form  id='savi' style='position:relative;top:1030px;' method='POST' action='updatedashboard.php'>
+		 			<!--<font color='white'>First Name<label for='mad' class='attri'>*</label>:<br>
+		 			<input class='attri' maxlength='20' type='text' name='firstname' placeholder='First Name' required />
+		 			<br><br>
+		 			Last Name<label for='mad' class='attri'>*</label>:<br>
+		 			<input class='attri' maxlength='20' type='text' name='lastname' placeholder='Last Name' required />
+		 			<br><br>-->
+		 			Send To<label for='mad' class='attri'>*</label>:<br>
+		 			<input class='attri' maxlength='40' type='email' name='emailaddress' placeholder='anything@iitrpr.ac.in' required />
+		 			<input  name='from' value='$row[0]' style='visibility:hidden;' />
+		 			<input  name='subject' value='Applications' style='visibility:hidden;' />
+		 			<br><br>
+		 			Leave From<label for='mad' class='attri'>*</label>:
+		 			<input id='start' name='start' class='attri' type='date' /> 
+		 			&nbsp To<label for='mad' class='attri'>*</label>:
+		 			<input id='end' class='attri' name='end' type='date' />
+		 			<br><br>
+		 			Description<label for='mad' class='attri'>*</label>:<br></font>
+		 			<textarea rows='7' cols='68' maxlength='200' class='attri' name='description' placeholder='Enter reason for leave...(max. 200 characters)' required></textarea>
+		 			<br><br>
+		 			<input class='but' type='reset' name='reset'  value='Reset' /> 
+		 			&nbsp &nbsp <input class='but' type='submit' name='SubmitApplication' value='Submit'>
+		 			<br><br>
+		 			<label for='mad' class='attri'>* marked fields are madontary.</label>
+		 		</form>
+		 	</body>
+		 	<script>
+		 		function prevent_scrolling(){
+		 			var h=window.innerHeight;
+		 			var x= document.getElementById('leave');
+		 			x.style.height=h+'px';}
+
+		 			function prevent_scrolling(){
+		 				var w=window.innerWidth;
+		 				var x= document.getElementById('background');
+		 				x.style.width=w+'px';}
+		 				window.addEventListener('load',prevent_scrolling);
+
+		 			</script>
+		 		</head>
+		 		</html>

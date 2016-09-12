@@ -1,0 +1,55 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class Comment{
+
+	public static String wordc = "";
+	public static int counter = 1;
+
+	public static String checkc(FileInputStream fis) throws IOException {
+		wordc = "";
+		lex.ch = (char)fis.read();
+		while (fis.available() > 0 && counter > 0){
+			if (lex.ch!='*' && lex.ch!='/'){
+				wordc = wordc + lex.ch;
+				lex.ch = (char)fis.read();
+				continue;
+			}
+			if (lex.ch == '*'){
+				lex.ch = (char)fis.read();
+				if (lex.ch == '/'){
+					counter = counter - 1;
+					if (counter != 0){
+						wordc = wordc + "*";
+						wordc = wordc + "/";
+					}
+					lex.ch = (char)fis.read();
+					continue;
+				} else {
+					wordc = wordc + "*";
+					continue;
+				}
+			} else if (lex.ch == '/'){
+				lex.ch = (char)fis.read();
+				if (lex.ch == '*'){
+					counter = counter + 1;
+					wordc = wordc + "/";
+					wordc = wordc + "*";
+					lex.ch = (char)fis.read();
+					continue;
+				} else {
+					wordc = wordc + "/";
+					continue;
+				}
+			}
+		}
+		if (counter == 0){
+			return wordc;
+		} else {
+			return "-1";
+		}
+
+	}
+	
+}

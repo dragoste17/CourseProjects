@@ -1,0 +1,3 @@
+gases = ['He','ne','ae','kr']
+for gas in gases
+	print gas

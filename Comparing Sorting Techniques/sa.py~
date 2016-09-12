@@ -1,0 +1,109 @@
+import random
+import pdb
+from matplotlib import pyplot
+
+
+
+
+
+
+
+def retArray(k):
+	'''This function wil return an array of length "k", which is given as an argument.'''
+	array = [random.randint(0,10) for _ in range(k)]
+	return array
+
+
+
+
+
+
+
+
+
+def checkSort(array):
+	'''This will check if the array is sorted and repeats two check sort with incremented alpha.'''
+	c=1
+	for i in range(len(array)-1)
+		if array[i]>array[i+1]
+			c=0
+	return c
+
+
+
+
+
+
+
+
+def twocheck(array,alp):
+	'''This method will attempt to sort the array by picking up randomly two numbers
+	and trying to swap them ultimately leading to all numbers being picked up and sorted if lucky.'''
+	for elem in range(alp):
+		a = random.randrange(len(array))
+		b = random.randrange(len(array))
+		if a>b:
+			a,b=b,a
+		if array[a]>array[b]:
+			array[a],array[b]=array[b],array[a]
+
+
+
+
+
+
+
+def optAlpha(array,alp):
+	'''This function will give the smallest value of alpha for which the list is sorted.'''
+	m = checkSort(array)
+	if m!=1:
+		while m!=1:
+			arr = array[:]
+			alp = alp + 1
+			twocheck(arr,alp)
+			m = checkSort(arr)
+		array = arr
+	return alp
+		
+
+
+
+
+
+alphaArray = []
+def avgAlpha(array):
+	'''This function will run 2 check alpha for 100 times and then calculate the average value
+	of alpha that is obtained.''' 
+	tot = 0
+	for i in range(0,100):
+		alp = optAlpha(array,0)
+		tot = tot + alp
+	print tot
+	alphaArray.append(tot/100)
+
+
+
+
+
+
+def graph(x,y):
+	'''This function will plot a graph of the two given inputs x and y'''
+	pyplot.ylabel('Alpha')
+	pyplot.xlabel('n')
+	pyplot.plot(x,y)
+	pyplot.show()
+
+
+
+
+
+
+
+kArray=[]
+for i in range(50,301):
+	kArray.append(i)
+	array = retArray(i)
+	avgAlpha(array)
+print kArray
+print alphaArray
+graph(kArray,alphaArray)

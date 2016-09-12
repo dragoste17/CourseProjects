@@ -1,0 +1,12 @@
+import java.util.*
+import java.io.*
+
+public class String{
+	
+	public static String words = "";
+
+	public static void checks(){
+		
+	}
+
+}
